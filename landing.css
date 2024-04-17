@@ -1,0 +1,1036 @@
+/*Подключение нового шрифта*/
+@font-face {
+    font-family: "Manrope Thin";
+    src: url("media/ofont.ru_Manrope.ttf");
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    max-width: 100%; /*Максимальная ширина страницы*/
+    margin: 0 auto; /*Выравнивание по центру*/
+    font-family: "Manrope Thin", sans-serif; /*Шрифт*/
+}
+
+main {
+    overflow: hidden;
+}
+
+/*Шапка*/
+
+#menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  justify-content: space-evenly;
+  transition: background-color 0.5s ease;
+  }
+
+  .slide {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .slide.visible {
+    opacity: 1;
+  }
+  
+  .overlay, .modal {
+    transition: opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #menu li {
+    float: left; /*это свойство применяется к каждому элементу <li>, заставляя их выстраиваться в одну линию слева направо, вместо того чтобы быть стопкой вертикально.*/
+  }
+  
+  #menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.5s ease;
+    font-size: calc(1vh + 1vw);
+    text-shadow: #0000006e 0.1em 0.1em 0em;
+}
+  
+  #menu li a:hover {
+    color: #649ff7;
+  }
+
+  #menu.scrolled {
+    background-color:#262626;
+    opacity: 0.9;
+    box-shadow: 0 0 8px 8px rgb(0 0 0 / 90%);
+    height: 9%;
+  }
+  
+  #logo {
+    float: left;
+    margin-left: 0%;
+    width: 111%;
+  }
+  
+  /*Шапка*/
+
+  /*Первый экран*/
+  .cover {
+    position: relative;
+    height: 100vh;
+    background-image: url("media/обложка.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+  }
+
+  .cover-text {
+    position: absolute;
+    top: 47%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    text-shadow: #0000006e 0.1em 0.1em 0em;
+}
+
+  .cover-title {
+    font-size: calc(3.2vh + 3vw);
+    margin-bottom: 1%;
+  }
+
+  .cover-subtitle {
+    font-size: calc(2vh + 1vw);
+  }
+
+  .cover-form {
+    position: absolute;
+    top: 75%;
+    left: 14%;
+    display: flex;
+  }
+
+  .cover-form input {
+    width: calc(23vh + 21vw);
+    height: calc(3vh + 2vw);
+    border-radius: 4vh;
+    border: none;
+    padding: 0 1vh;
+    font-size: 2.5vh;
+    text-align: center;
+    font-family: "Manrope Thin", sans-serif;
+  }
+  
+/* Стиль для плавного появления и исчезновения placeholder */
+input:hover::placeholder {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+input:not(:hover)::placeholder {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.zaplatka {
+  width: calc(15vh + 13vw);
+  height: 5vh;
+  background-color: white;
+  display: flex;
+  position: absolute;
+  top: 13%;
+  left: 21%;
+  opacity: 0;
+  z-index: -1;
+}
+
+#phonemask:focus ~ .zaplatka {
+  z-index: 1;
+  opacity: 1;
+  background-color: white;
+  animation: appearAndDisappear 1s ease forwards;
+}
+
+@keyframes appearAndDisappear {
+  100% {
+    opacity: 0;
+    z-index: -1;
+  }
+  50% {
+    opacity: 1;
+    z-index: 1;
+  }
+  100% {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+input[type=submit] {
+  width: 88%;
+  border-radius: 4vh;
+  border: none;
+  padding: 0 1vh;
+  font-size: calc(1vh + 1vw);
+  text-align: center;
+  font-family: "Manrope Thin", sans-serif;
+  background-color: #f52a2a;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  position: absolute;
+  left: 124%;
+  text-shadow: 0.1em 0.1em 0em #00000059;
+  top: -1%;
+}
+
+.galka {
+  width: 9%;
+  height: 16%;
+  position: absolute;
+  top: 83%;
+  left: 48%;
+  transition: 0.5s ease;
+}
+
+.galka:hover {
+  cursor:pointer;
+  transform: rotateX(191deg);
+}
+
+#thankYouModal {
+  width: 36vh;
+  height: 30vh;
+  position: fixed;
+  top: 31vh;
+  left: 29vw;
+  background-color: white;
+  text-align: center;
+  padding: 26vh;
+  padding-top: 7vh;
+  padding-left: 25vh;
+  padding-bottom: 0vh;
+  font-size: 3vh;
+  border-radius: 1vh;
+  z-index: 2;
+}
+
+/* Стили для затемнения фона */
+.overlay {
+  position: fixed; /* Фиксированное позиционирование относительно окна браузера */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Черный фон с прозрачностью */
+  z-index: 1; /* затемнение находится над другими элементами */
+}
+
+#title {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  transform: translate(35%, 40%);
+}
+
+/*Продукт*/
+
+#second_slide_image {
+  position: relative;
+  left: 50%;
+  top: 30%;
+  width: 35%;
+  height: auto;
+  max-width: 100%;
+  size: auto;
+  transform: translate(30%, 41%);
+}
+
+#second_slide {
+  position: relative;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  width: 100%;
+  overflow: hidden;
+  }
+
+
+#second_slide_text {
+  position: relative;
+  color: black;
+  font-size: calc(1vh + 1vw);
+  max-width: 52%;
+  line-height: 225%;
+  transform: translate(7%, -105%);
+  max-height: calc(9vh + 9vw);
+}
+
+#third_slide_image_1 {
+  position: relative;
+  left: 50%;
+  top: 3%;
+  width: 35%;
+  height: auto;
+  max-width: 100%;
+  size: auto;
+  transform: translate(-100%, 42%);
+  }
+
+#third_slide {
+  background-color: #ebeff2;
+  position: relative;
+  height: fit-content;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  width: 99vw;
+  overflow: hidden;
+}
+
+div#third_slide_block {
+  transform: translate(0px, -25%);
+}
+
+#title2 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  transform: translate(26%, 40%);
+}
+
+#third_slide_text_1 {
+  position: relative;
+  color: black;
+  font-size: calc(1vh + 1vw);
+  max-width: 52%;
+  line-height: 225%;
+  transform: translate(7%, 72%);
+  width: 42%;
+  float: inline-start;
+}
+
+#third_slide_image_2 {
+  position: relative;
+  width: 35%;
+  height: auto;
+  max-width: 100%;
+  margin-top: calc(20vh + 13vw);
+  margin-left: 5%;
+  display: flex;
+  margin-bottom: 5%;
+}
+
+#third_slide_text_2 {
+  position: relative;
+  color: black;
+  font-size: calc(1vh + 1vw);
+  line-height: 225%;
+  float: inline-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 58%;
+  margin-top: -26%;
+  width: 38%;
+} 
+
+#title3 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: absolute;
+  white-space: pre;
+  transform: translate(55%, 21%);
+}
+
+#fourth_slide {
+  background-color: white;
+  height: calc(27vh + 38vw);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  overflow: visible;
+}
+
+#building {
+  position: relative;
+  left: 6%;
+  top: 34%;
+  transform: translate(29%, -40%);
+  max-width: 100%;
+  width: 13%;
+  height: auto;
+}
+
+#building_text {
+  position: relative;
+  color: black;
+  margin-right: 2%;
+  font-size: calc(1vh + 1vw);
+  margin-left: 24%;
+  bottom: 1%;
+  max-width: 22%;
+  line-height: 237%;
+  text-align: center;
+}
+
+#zoom {
+  position: relative;
+  left: 6%;
+  top: 15%;
+  transform: translate(29%, -40%);
+  max-width: 100%;
+  width: 13%;
+  height: auto;
+}
+
+#zoom_text {
+  position: relative;
+  color: black;
+  margin-right: 2%;
+  font-size: calc(1vh + 1vw);
+  margin-left: 24%;
+  bottom: 18%;
+  max-width: 22%;
+  line-height: 237%;
+  text-align: center;
+}
+
+#conference {
+  position: relative;
+  left: 6%;
+  top: -4%;
+  transform: translate(29%, -40%);
+  max-width: 100%;
+  width: 13%;
+  height: auto;
+}
+
+#conference_text {
+  position: relative;
+  color: black;
+  margin-right: 2%;
+  font-size: calc(1vh + 1vw);
+  margin-left: 24%;
+  bottom: 37%;
+  max-width: 22%;
+  line-height: 237%;
+  text-align: center;
+}
+
+#heart {
+  position: relative;
+  left: 59%;
+  top: -107%;
+  transform: translate(29%, -35%);
+  max-width: 100%;
+  width: 13%;
+  height: auto;
+}
+
+#heart_text {
+  position: relative;
+  color: black;
+  margin-right: 2%;
+  font-size: calc(1vh + 1vw);
+  margin-left: 77%;
+  bottom: 137%;
+  max-width: 22%;
+  line-height: 237%;
+  text-align: center;
+}
+
+#ruble {
+  position: relative;
+  left: 59%;
+  top: -123%;
+  transform: translate(29%, -40%);
+  max-width: 100%;
+  width: 13%;
+  height: auto;
+}
+
+#ruble_text {
+  position: relative;
+  color: black;
+  margin-right: 2%;
+  font-size: calc(1vh + 1vw);
+  margin-left: 77%;
+  bottom: 154%;
+  max-width: 22%;
+  line-height: 237%;
+  text-align: center;
+}
+
+#strong {
+  position: relative;
+  left: 59%;
+  top: -141%;
+  transform: translate(29%, -40%);
+  max-width: 100%;
+  width: 13%;
+  height: auto;
+}
+
+#strong_text {
+  position: relative;
+  color: black;
+  margin-right: 2%;
+  font-size: calc(1vh + 1vw);
+  margin-left: 77%;
+  bottom: 173%;
+  max-width: 22%;
+  line-height: 237%;
+  text-align: center;
+}
+
+#fifth_slide {
+  position: relative;
+  height: calc(31vh + 34vw);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: -10%;
+}
+
+#fifth_slide_background {
+  background-color: rgb(255, 230, 153);
+  position: relative;
+  height: 49%;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  top: 25%;
+}
+
+#fifth_slide_text {
+  position: relative;
+  color: black;
+  font-size: calc(1vh + 1vw);
+  margin-left: 6%;
+  bottom: -26%;
+  max-width: 91%;
+  line-height: 225%;
+}
+
+/*Продукт*/
+
+/*Выгоды*/
+
+#sixth_slide {
+  background-color: white;
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  width: 99vw;
+}
+
+#title4 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  transform: translate(170%, 116%);
+  width: 15%;
+}
+
+#under_title {
+  position: relative;
+  color: black;
+  font-size: calc(0.5vh + 1vw);
+  line-height: 225%;
+  text-align: center;
+  font-weight: 100;
+  transform: translate(62%, 105%);
+  width: 46%;
+  white-space: pre;
+}
+
+#sixth_slide_block_1, #sixth_slide_block_2, #sixth_slide_block_3 {
+  position: relative;
+  display: inline-block;
+  top: 1%;
+  margin: 5.5%;
+}
+
+#sixth_slide_image_1, #sixth_slide_image_2, #sixth_slide_image_3 {
+  position: relative;
+  width: 28%;
+  transform: translate(-57%, 116%);
+}
+
+#sixth_slide_text_1, #sixth_slide_text_2, #sixth_slide_text_3 {
+  position: relative;
+  margin-left: 36%;
+  width: 96%;
+  font-size: calc(0.2vh + 1vw);
+  transform: translate(-9%, 8%);
+}
+
+#sixth_slide_image_2 {
+  width: 35%;
+  left: -3%;
+}
+
+#sixth_slide_image_3 {
+  width: 35%;
+  transform: translate(-90%, 143%);
+}
+
+#sixth_slide_text_3 {
+  right: 5%;
+  transform: translate(-15%, 23%);
+}
+
+/*Выгоды*/
+
+/*Доверие*/
+
+#seventh_slide {
+  position: relative;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-color: #ebeff2;
+}
+
+#title5 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  transform: translate(75%, 5%);
+  height: 23%;
+  display: flex;
+}
+
+#first_review {
+  margin-top: 30%;
+  text-align: center;
+  transform: translate(-147%, -51%);
+  width: 19%;
+  font-size: calc(0.5vh + 0.8vw);
+}
+
+#anna_photo, #dmitry_photo, #vladimir_photo {
+  width: 72%;
+}
+
+#second_review {
+  width: 19%;
+  margin-top: 15%;
+  transform: translate(-101%, -6%);
+  text-align: center;
+  font-size: calc(0.5vh + 0.8vw);
+}
+
+#third_review {
+  width: 19%;
+  margin-top: 15%;
+  transform: translate(-60%, -6%);
+  text-align: center;
+  font-size: calc(0.5vh + 0.8vw);
+}
+
+#eighth_slide {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  width: 99vw;
+  overflow: hidden;
+}
+
+#title6 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  transform: translate(40%, 5%);
+  height: 23%;
+}
+
+#first_image_line {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#eighth_slide_image_1 {
+  width: 16%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_2 {
+  width: 18%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_3 {
+  width: 10%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_4 {
+  width: 14%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_5 {
+  width: 6%;
+  height: auto;
+  transition: 1s;
+}
+
+#second_image_line {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#eighth_slide_image_6 {
+  width: 15%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_7 {
+  width: 18%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_8 {
+  width: 6%;
+  height: auto;
+  transition: 1s;
+}
+
+#eighth_slide_image_9 {
+  width: 6%;
+  height: auto;
+  transition: 1s;
+}
+
+.mancosa-hover:hover, .aptech-hover:hover, .tpp-hover:hover, .ludidela-hover:hover, 
+.ipb-hover:hover, .rosreestr-hover:hover, .tax-hover:hover, .hh-hover:hover, .poo-hover:hover {
+  opacity: 1;
+}
+
+.mancosa-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(-225%, -5%);
+  width: 16%;
+  transition: 1s;
+}
+
+.aptech-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(-75%, -5%);
+  width: 18%;
+  transition: 1s;
+}
+
+.tpp-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(70%, 0%);
+  width: 10%;
+  transition: 1s;
+}
+
+.ludidela-hover {
+  opacity: 0;
+  background-color: white;
+  position: absolute;
+  transform: translate(241%, -1%);
+  width: 10.5%;
+  transition: 1s;
+  height: 9%;
+}
+
+.ipb-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(513%, 11%);
+  width: 8%;
+  transition: 1s;
+}
+
+.rosreestr-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(-210%, 1%);
+  width: 15%;
+  transition: 1s;
+}
+
+.tax-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(-22%, 0%);
+  width: 18%;
+  transition: 1s;
+}
+
+.hh-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(306%, 0%);
+  width: 6.2%;
+  transition: 1s;
+}
+
+.poo-hover {
+  opacity: 0;
+  position: absolute;
+  transform: translate(654%, 20%);
+  width: 5.5%;
+  transition: 1s;
+  background-color: white;
+}
+
+#ninth_slide {
+  position: relative;
+  height: 116vh;
+  background-size: cover;
+  background-position: center;
+  width: 99vw;
+  overflow: hidden;
+  background-color: #ebeff2;
+}
+
+#title7 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  transform: translate(29%, 5%);
+  height: 23%;
+}
+
+.group_of_graduators {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  transform: translate(2%, -16%);
+}
+
+.graduator {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 6%;
+  font-size: calc(0vh + 1vw);
+  text-align: center;
+}
+
+.graduator_photo {
+  width: 71%;
+  box-shadow: 0px 0px 5px;
+}
+
+#tenth_slide {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  width: 99vw;
+  overflow: hidden;
+  margin-bottom: 5%;
+}
+
+#title8 {
+  font-size: calc(4vh + 1vw);
+  color: #4472c4;
+  font-weight: normal;
+  position: relative;
+  white-space: pre;
+  height: 23%;
+  margin-bottom: 0%;
+}
+
+#tenth_slide_title_and_subtitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#under_title2 {
+  font-weight: 100;
+  font-size: calc(0.5vh + 1vw);
+  width: 28%;
+  text-align: center;
+  line-height: 236%;
+}
+
+#photo_line {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  margin-left: -3%;
+  margin-right: -3%;
+}
+
+.teacher_photo_1 {
+  width: 16%;
+}
+
+.teacher_photo_3 {
+  width: 19%;
+}
+
+.teacher_photo_2 {
+  width: 20%;
+}
+
+.teacher_photo_4 {
+  width: 20%;
+}
+
+.teacher_photo_5 {
+  width: 20%;
+}
+
+/*Доверие*/
+
+/*Целевое действие*/
+
+#eleventh_slide {
+  position: relative;
+  height: 100vh;
+  background-image: url(media/nsuem.png);
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.eleventh_slide_text {
+  position: absolute;
+  transform: translate(1%, 49%);
+  text-shadow: #0000006e 0.1em 0.1em 0em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: calc(1vh + 1vw);
+}
+
+.eleventh_slide_title {
+  font-size: 9vh;
+  margin-bottom: 1vh;
+}
+
+.eleventh_slide_subtitle {
+  font-size: 4.5vh;
+  width: 82%;
+}
+
+.cover-form_2 {
+  position: absolute;
+  top: 65%;
+  left: 14%;
+}
+
+.cover-form_2 input {
+  width: 66vh;
+  height: 7vh;
+  border-radius: 4vh;
+  border: none;
+  padding: 0 1vh;
+  font-size: 2.5vh;
+  text-align: center;
+  font-family: "Manrope Thin", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+/* Стиль для плавного появления и исчезновения placeholder */
+input:hover::placeholder {
+opacity: 0;
+transition: opacity 0.5s ease;
+}
+
+input:not(:hover)::placeholder {
+opacity: 1;
+transition: opacity 0.5s ease;
+}
+
+.eleventh_slide_zaplatka {
+width: 28vh;
+height: 5vh;
+background-color: white;
+display: flex;
+position: absolute;
+top: 1vh;
+left: 21vh;
+opacity: 0;
+z-index: -1;
+}
+
+#phonemask:focus ~ .eleventh_slide_zaplatka {
+z-index: 1;
+opacity: 1;
+background-color: white;
+animation: appearAndDisappear 1s ease forwards;
+}
+
+/*Целевое действие*/
+
+/*Подвал*/
+
+footer {
+  position: relative;
+  max-height: 65vh;
+  background-color: #262626;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  font-size: calc(0.5vh + 1vw);
+  overflow: hidden;
+  align-items: center;
+}
+
+.footer_text {
+  margin-top: -2%;
+}
+
+/*Подвал*/

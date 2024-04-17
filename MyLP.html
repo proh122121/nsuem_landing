@@ -1,0 +1,340 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>Нагорников</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> <!--Подключение анимации-->
+        <link rel="stylesheet" href="landing.css">
+    </head>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <body>
+        <!-- Шапка -->
+        <header>
+        <!--Меню-->
+        <ul id="menu">
+            <a href="#cover"><img id="logo" src="media/логотип нгуэу.png" alt="Логотип НГУЭУ"></a> 
+            <li><a href="#second_slide">О направлении</a></li>
+            <li><a href="#fourth_slide">Преимущества</a></li>
+            <li><a href="#seventh_slide">Отзывы</a></li>
+            <li><a href="#eighth_slide">Партнеры</a></li>
+            <li><a href="#tenth_slide">Наши преподаватели</a></li>
+            <li><a href="#eleventh_slide">Подать заявку</a></li>
+            <li><a href="#footer">Контакты</a></li>
+        </ul>
+        </header>
+        <!-- Шапка -->
+        <!-- Первый экран -->
+        <main>
+            <script>
+                document.addEventListener('DOMContentLoaded', (event) => {
+                    const slides = document.querySelectorAll('.slide');
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                            }
+                        });
+                }, {
+                    threshold: 0.5
+                });
+                slides.forEach(slide => {
+                    observer.observe(slide);
+                });
+            });
+            </script>
+            <div class="cover" id="cover">
+                <div class="cover-text">
+                    <div class="cover-title">Информационные системы и технологии</div>
+                    <div class="cover-subtitle">Для мечтающих о карьере в сфере IT</div>
+                </div>
+                <form action="mailto:" method="post" enctype="text/plain" class="cover-form">
+                    <input name ="phone" id="phonemask" type="tel" required placeholder="Оставьте телефон, мы вам перезвоним!">
+                    <span class="zaplatka"></span>
+                    <input type="submit" value="Отправить">
+                </form>
+                <!--Маска для ввода номера телефона-->
+                <script>
+                    $(document).ready(function() {
+                    $("#phonemask").mask("+7 (999) 999 99-99");
+                    });
+                </script>
+                <img class="galka" src="media/Галка.svg" alt="Галка">
+            </div>
+            <div id="thankYouModal" class="modal">
+            Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.
+            </div>
+            <div class="overlay"></div>
+            <script>
+                function showModal(){
+                var overlay = document.querySelector('.overlay');
+                var modal = document.getElementById('thankYouModal');
+
+                overlay.classList.add('visible');
+                modal.classList.add('visible');
+
+                setTimeout(hideModal, 5000);
+                }
+
+                document.querySelector('.cover-form').addEventListener('submit', function(event){
+                event.preventDefault();
+                showModal();
+                });
+
+                function hideModal(){
+                var overlay = document.querySelector('.overlay');
+                var modal = document.getElementById('thankYouModal');
+
+                overlay.classList.remove('visible');
+                modal.classList.remove('visible');
+                }
+
+                document.querySelector('.overlay').addEventListener('click', hideModal);
+            </script>
+            <script>
+                document.querySelector('.galka').addEventListener('click', function(){
+                    document.getElementById('second_slide').scrollIntoView({behavior: 'smooth'});
+                })
+            </script>
+            <script>
+                window.addEventListener('scroll', function() {
+                    var menu = document.querySelector('#menu');
+                    var cover = document.querySelector('.cover');
+                    if (window.scrollY > cover.offsetHeight) {
+                        menu.classList.add('scrolled');
+                    } else {
+                        menu.classList.remove('scrolled');
+                    }
+                });
+            </script>
+            <!-- Первый экран -->
+            <!-- Продукт -->
+            <div id="second_slide" class="slide">
+                <h1 id="title">В чем суть направления?</h1>
+                <img id="second_slide_image" src="media/второй слайд.jpg">
+                <p id="second_slide_text">
+                    Специальность “Информационные системы и технологии” - это направление, которое готовит специалистов в области создания, внедрения
+                    и поддержки современных информационных систем. Это направление обучения охватывает широкий спектр дисциплин, начиная от программирования 
+                    и веб-разработки до управления проектами и обеспечения безопасности информационных систем.
+                </p>
+            </div> 
+            <div id="third_slide" class="slide">
+                <h1 id="title2">Это хороший выбор для вас, если</h1>
+                <img id="third_slide_image_1" src="media/третий слайд 1.jpg" alt="image1">
+                <ul id="third_slide_text_1">
+                <li>Цените практический опыт: Хотите получить реальные навыки, применимые в IT-сфере.</li>
+                <li>Стремитесь к карьере в IT: Направлены на получение профессии в динамично развивающейся IT-индустрии.</li>
+                </ul>
+                <div id="third_slide_block">
+                    <img id="third_slide_image_2" src="media/третий слайд 2.jpg" alt="image2">
+                    <ul id="third_slide_text_2">
+                        <li>Хотите работать с современными технологиями: <br> Интересуетесь последними достижениями в <br> области информационных технологий.</li>
+                        <li>Желаете внедрять инновации: Имеете амбиции <br> вносить свой вклад в развитие IT-решений и систем.</li>
+                    </ul>
+                </div> 
+            </div>
+            <div id="fourth_slide" class="slide">
+                <h1 id="title3">Преимущества нашей программы</h1>
+                <img src="media/building.svg" alt="building" id="building">
+                <p id="building_text">Комфортное общежитие с <br> современным ремонтом</p>
+                <img src="media/zoom.svg" alt="zoom" id="zoom">
+                <p id="zoom_text">Можем преподавать<br>дистанционно</p>
+                <img src="media/conference.svg" alt="conference" id="conference">
+                <p id="conference_text">Консультации с <br> заботливым наставником</p>
+                <img src="media/heart.svg" alt="heart" id="heart">
+                <p id="heart_text">Поможем найти работу <br> после выпуска</p>
+                <img src="media/ruble.svg" alt="ruble" id="ruble">
+                <p id="ruble_text">Финансовая поддержка <br> за успехи в учёбе</p>
+                <img src="media/strong.svg" alt="strong" id="strong">
+                <p id="strong_text">Внеурочные активности <br> для саморазвития</p>
+            </div>
+            <div id="fifth_slide" class="slide">
+                <div id="fifth_slide_background">
+                    <p id="fifth_slide_text">
+                        Принятие решения о поступлении в университет - это шаг к новым возможностям и открытиям, который открывает двери в мир знаний и профессионального роста. 
+                        Не бойтесь идти за своей мечтой, ведь каждое великое начинание начинается с первого смелого шага.
+                    </p>
+                </div>
+            </div>
+            <!-- Продукт-->
+            <!-- Выгоды -->
+            <div id="sixth_slide" class="slide">
+                <h1 id="title4">Что вы получите в конце обучения?</h1>
+                <h2 id="under_title">Вы станете востребованным и высококвалифицированным <br> специалистом, готовым к решению самых сложных задач в сфере IT</h2>
+                <div id="sixth_slide_block_1">
+                    <img id="sixth_slide_image_1" src="media/one.svg" alt="image1">
+                    <p id="sixth_slide_text_1">
+                        <b>Профессиональные компетенции <br></b>
+                        Фундаментальные знания в области <br> программирования, архитектуры <br> компьютерных и телекоммуникационных <br> сетей, баз данных и кибербезопасности
+                    </p>
+                </div>
+                <div id="sixth_slide_block_2">
+                    <img id="sixth_slide_image_2" src="media/two.svg" alt="image2">    
+                    <p id="sixth_slide_text_2">
+                        <b>Управление <br></b>
+                        Навыки управления командой <br> специалистов в ходе <br> планирования для реализации <br> амбициозных проектов
+                    </p>
+                </div>
+                <div id="sixth_slide_block_3">
+                    <img id="sixth_slide_image_3" src="media/three.svg" alt="image3">    
+                    <p id="sixth_slide_text_3">
+                        <b>Старт карьеры <br></b>
+                        Практики в организациях, <br> знакомство с акулами бизнеса и <br> содействие в трудоустройстве <br> гарантированно помогут вам <br> начать долгожданную карьеру
+                    </p>
+                </div>
+            </div>
+            <!-- Выгоды -->
+            <!-- Доверие -->
+            <div>
+                <div id="seventh_slide" class="slide">
+                    <h1 id="title5">Отзывы наших выпускников</h1>
+                    <div id="first_review">
+                        <p id="anna"><b>Анна</b></p>
+                        <img id="anna_photo" src="media/Анна.jpg" alt="Анна">
+                        <p id="anna_text">«Учеба открыла мне новые горизонты. Профессора не только передают знания, но и вдохновляют на исследования и разработки!»</p> 
+                    </div>
+                    <div id="second_review">
+                        <p id="dmitry"><b>Дмитрий</b></p>
+                        <img id="dmitry_photo" src="media/Дмитрий.jpg" alt="Дмитрий">
+                        <p id="dmitry_text">«Благодаря НГУЭУ, я получил не только теоретические знания, но и практические навыки, которые сразу смог применить в работе. Отличная подготовка специалистов!»</p>
+                    </div>
+                    <div id="third_review">
+                        <p id="vladimir"><b>Владимир</b></p>
+                        <img id="vladimir_photo" src="media/Владимир.jpg" alt="Владимир">
+                        <p id="vladimir_text">Программа сочетает в себе актуальность, практичность и инновационный подход к обучению.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="eighth_slide" class="slide">
+                <h1 id="title6">Наши партнёры</h1>
+                <div id="first_image_line">
+                    <img src="media/mancosa-hover.png" alt="Mancosa" class="mancosa-hover">
+                    <img id="eighth_slide_image_1" src="media/mancosa.png" alt="Mancosa">
+                    <img src="media/aptech-hover.png" alt="Aptech" class="aptech-hover">
+                    <img id="eighth_slide_image_2" src="media/aptech.png" alt="Aptech">
+                    <img src="media/tpp-hover.png" alt="Tpp" class="tpp-hover">
+                    <img id="eighth_slide_image_3" src="media/tpp.png" alt="Tpp">
+                    <img src="media/ludidela-hover.png" alt="Ludidela" class="ludidela-hover">
+                    <img id="eighth_slide_image_4" src="media/ludidela.png" alt="Ludidela">
+                    <img src="media/ipb.webp" alt="Ipb" class="ipb-hover">
+                    <img id="eighth_slide_image_5" src="media/ball.png" alt="Ball">
+                </div>
+                <div id="second_image_line">
+                    <img src="media/rosreestr-hover.jpg" alt="Rosreestr" class="rosreestr-hover">
+                    <img id="eighth_slide_image_6" src="media/rosreestr.png" alt="Rosreestr">
+                    <img src="media/tax-hover.png" alt="Tax" class="tax-hover">
+                    <img id="eighth_slide_image_7" src="media/tax.png" alt="Tax">
+                    <img src="media/hh-hover.png" alt="Hh" class="hh-hover">
+                    <img id="eighth_slide_image_8" src="media/hh.png" alt="Hh">
+                    <img src="media/poo-hover.png" alt="Poo" class="poo-hover">
+                    <img id="eighth_slide_image_9" src="media/poo.png" alt="Poo">
+                </div>
+            </div>
+            <div id="ninth_slide" class="slide">
+                <h1 id="title7">Известные выпускники НГУЭУ</h1>
+                <div class="group_of_graduators">
+                    <div class="graduator">
+                        <p><b>Толоконский Виктор Александрович</b></p>
+                        <img class="graduator_photo" src="media/tolokonsky.jpg" alt="Толоконский Виктор Александрович">
+                        <p>Российский государственный деятель, полномочный представитель Президента Российской Федерации в Сибирском федеральном округе (2010‐2014 гг.)</p>
+                    </div>
+                    <div class="graduator">
+                        <p><b>Чабунин Анатолий Михайлович</b></p>
+                        <img class="graduator_photo" src="media/chabunin.jpg" alt="Чабунин Анатолий Михайлович">
+                        <p>Заместитель генерального директора ПАО «Российские железные дороги»</p>
+                    </div>
+                    <div class="graduator">
+                        <p><b>Головко Вадим Михайлович</b></p>
+                        <img class="graduator_photo" src="media/golovko.jpg" alt="Головко Вадим Михайлович">
+                        <p>Заместитель Полномочного представителя Президента Российской Федерации в Сибирском федеральном округе</p>
+                    </div>
+                </div>
+            </div>
+            <div id="tenth_slide" class="slide">
+                <div id="tenth_slide_title_and_subtitle">
+                    <h1 id="title8">Кто будет вас учить</h1>
+                    <h2 id="under_title2">Вас будет обучать квалифицированная команда преподавателей с большим стажем</h2>
+                </div>
+                <div id="photo_line">
+                    <img src="media/photo_line_1.png" alt="photo_line_1" class="teacher_photo_1">
+                    <img src="media/photo_line_2.jpg" alt="photo_line_2" class="teacher_photo_3">
+                    <img src="media/photo_line_3.png" alt="photo_line_3" class="teacher_photo_2">
+                    <img src="media/photo_line_4.png" alt="photo_line_4" class="teacher_photo_4">
+                    <img src="media/photo_line_5.png" alt="photo_line_5" class="teacher_photo_5">
+                </div>
+            </div>
+            <!-- Целевое действие -->
+            <div class="slide" id="eleventh_slide">
+                <div class="eleventh_slide_text">
+                    <div class="eleventh_slide_title">Сделай шаг навстречу карьере</div>
+                    <div class="eleventh_slide_subtitle">Оставьте телефон. С вами свяжется специалист нашего информационного центра и подробно расскажет про поступление</div>
+                </div>
+                <form action="#" method="post" enctype="text/plain" class="cover-form_2">
+                    <input name="phone" class="phonemask" type="tel" required placeholder="Оставьте телефон, мы вам перезвоним!">
+                    <span class="eleventh_slide_zaplatka"></span>
+                    <input type="submit" value="Отправить">
+                </form>
+                <script>
+                    $(document).ready(function() {
+                    $(".phonemask").mask("+7 (999) 999 99-99");
+                    });
+                </script>
+                <script>
+                function showModal(){
+                var overlay = document.querySelector('.overlay');
+                var modal = document.getElementById('thankYouModal');
+
+                overlay.classList.add('visible');
+                modal.classList.add('visible');
+
+                setTimeout(hideModal, 5000);
+                }
+
+                document.querySelector('.cover-form_2').addEventListener('submit', function(event){
+                event.preventDefault();
+                showModal();
+                });
+
+                function hideModal(){
+                var overlay = document.querySelector('.overlay');
+                var modal = document.getElementById('thankYouModal');
+
+                overlay.classList.remove('visible');
+                modal.classList.remove('visible');
+                }
+
+                document.querySelector('.overlay').addEventListener('click', hideModal);
+                  </script>
+            </div>  
+        </main>
+        <!-- Целевое действие -->
+        <!-- Подвал -->
+        <footer class="footer" id="footer">
+            <div class="footer_text_1">
+                <h2>Наши контакты</h2>
+                <p>Кафедра информационных технологий</p>
+                <p>Адрес: ул. Каменская 52/1, офис 203 <br>
+                    Номер телефона приёмной комиссии: +7 (383) 2-110-500 <br> 
+                    Email заведующего кафедрой информационных технологий <br> кандидата физико-математических наук <br> Пестунова Андрея Игоревича: a.i.pestunov@edu.nsuem.ru
+                </p>
+                <p>© Нагорников Глеб 2024 <br> по вопросам писать в telegram: @Gleb22342</p>
+            </div>
+            <div class="footer_text_2">
+                <div class="column_1">
+                    <h2>Главная страница ВУЗА</h2>
+                    <p>www.nsuem.ru</p>
+                </div>
+                <div class="column_2">
+                    <h2>Мы в социальных сетях</h2>
+                    <p>ВКОНТАКТЕ https://vk.com/it_nsuem</p>
+                </div>
+                <div class="column_3">
+                    <h2>КАФЕДРА ИНФОРМАЦИОННЫХ ТЕХНОЛОГИЙ</h2>
+                    <p>г. Новосибирск, ул. Каменская 52/1, ауд. 409
+                        +7 (383) 243-95-19</p>
+                </div>
+            </div>
+        </footer>
+        <!-- Подвал -->
+    </body>
+</html>
